@@ -1,0 +1,60 @@
+<% @virtual_router_id_base = 1 -%>
+<% @counter = 1 -%>
+<% def priority(state) -%>
+<%   priority = 100 unless state == 'MASTER' -%>
+<%   priority ||= 150 -%>
+<% end -%>
+! Configuration File for keepalived
+
+global_defs {
+!   notification_email {
+!     what@ever.com
+!   }
+   router_id <%= @hostname %>
+}
+
+<% @keepalived_check_scripts.each_pair do |name, value| -%> 
+vrrp_script <%= name %> {
+  script       <%= value['script'] %>
+  interval     <%= value['interval'] %>
+  fall         <%= value['fall'] %>
+  rise         <%= value['rise'] %>
+}
+<% end -%>
+
+<% @keepalived_groups.each_pair do |group, value| %>
+vrrp_sync_group <%= group %> { 
+   group { 
+<% value['interfaces'].each_pair do |interface,detail| -%>
+      <%= interface %>
+<% end -%>
+   }
+
+   notify <%= value['notify_script'] %>
+}
+<% value['interfaces'].each_pair do |interface,detail| -%>
+vrrp_instance <%= interface %>
+  state <%= value['state'] %>
+  interface <%= interface %>
+<% @counter = @virtual_router_id_base + @counter -%>
+  virtual_router_id <%= @counter  %>
+  priority <%= priority(value['state']) %>
+  advert_int 1
+  authentication {
+    auth_type PASS
+    auth_pass stongpasswordsentoverthewireincleartextsadface
+  }
+
+  virtual_ipaddress {
+<% detail['vips'].each do |vip| -%>
+    <%= vip %> dev <%= interface %>
+<% end -%>
+  }
+<% if detail['track_script'] -%>
+  track_script {
+    <%= detail['track_script'] %>
+  }
+<% end %>
+}
+<% end %>
+<% end -%>

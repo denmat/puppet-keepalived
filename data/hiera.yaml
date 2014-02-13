@@ -1,0 +1,8 @@
+---
+:backends:
+ - module_data
+ - yaml
+
+:hierarchy:
+  - nodes/%{fqdn}
+  - common

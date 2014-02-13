@@ -1,0 +1,20 @@
+vrrp_config:
+  config_template: 'keepalived/firewalls/keepalived.conf.erb'
+  vrrp_check_script:
+    keepalived_check:
+      script: '/usr/local/bin/keepalived_check.rb'
+      interval: 2
+      fall: 3
+      rise: 2 
+  vrrp_group: 
+    VG1:
+      state: MASTER
+      notify_script: '/usr/local/bin/keepalived_notify.rb'
+      interfaces:
+        external:
+          vips: [ '10.0.110.1/28' ]
+          track_script: 'keepalived_check'
+        internal:
+          vips: [ '192.168.1.254' ]
+keepalived::service::enable: true
+keepalived::service::ensure: true

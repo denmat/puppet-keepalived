@@ -1,0 +1,18 @@
+keepalived_packages:
+  keepalived:
+    ensure: latest
+
+keepalived_service:
+  ensure: true
+  enable: true
+
+keepalived_support_scripts:
+  '/usr/local/bin/keepalived_check.rb':
+    owner: root
+    group: root
+    mode:  0540
+  '/usr/local/bin/keepalived_notify.rb':
+    owner: root
+    group: root
+    mode:  0540
+
