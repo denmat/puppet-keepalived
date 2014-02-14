@@ -25,4 +25,7 @@ You will need the following gems:
 See the Rakefile for where I stick the files.
 
 
-
+### thanks to:
+ - [ripienaar](https://github.com/ripienaar/puppet-module-data)
+ - [dgoodlad](https://github.com/dgoodlad/puppet-module-data)
+ - [wfarr](https://github.com/wfarr/puppet-module-data)
