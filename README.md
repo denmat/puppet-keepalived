@@ -1,7 +1,7 @@
 puppet-keepalived
 =================
 
-H1 keepalived for puppet.
+## keepalived for puppet:
 
 This module is using puppet-data-module from [ripienaar](https://github.com/ripienaar/puppet-module-data) that allows you to do hiera lookups in a data directory attached to the module source code.
 
@@ -9,7 +9,7 @@ It requires that you modify your standard puppet and hiera code base and the rip
 
 The code in the current master branch is broken but there is a pull request that fixes this and makes it work nicely.
 
-H2 instructions:
+## instructions:
 
 You need to checkout the puppet-module-data code or copy and paste from the source on github.
 
