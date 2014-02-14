@@ -3,7 +3,6 @@ source "https://rubygems.org"
 group :development, :test do
   gem 'rspec-puppet', '0.1.6'
   gem 'rspec-core', '<= 2.14.7'
-  gem 'rspec-system-puppet', '2.2.1'
   gem 'puppet-lint', '0.3.2'
   gem 'puppetlabs_spec_helper', '0.4.1'
   gem 'hiera-puppet-helper'
