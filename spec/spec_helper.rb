@@ -10,7 +10,7 @@ Bundler.require :default, :test
 require 'puppetlabs_spec_helper/module_spec_helper'
 require 'hiera-puppet-helper/rspec'
 require 'hiera'
-require 'puppet/indirector/hiera'
+require 'puppet/indirector/code'
 
 FIXTURE_PATH = File.expand_path(File.join(__FILE__, '..', 'fixtures'))
 
@@ -38,7 +38,7 @@ RSpec.configure do |conf|
   conf.mock_framework = :rspec
 
   conf.before(:each) do
-    Puppet::Indirector::Hiera.stub(:hiera => hiera_stub)
+    Puppet::Indirector::Code.stub(:hiera => hiera_stub)
   end
 
   conf.module_path = File.join(FIXTURE_PATH, 'modules')
